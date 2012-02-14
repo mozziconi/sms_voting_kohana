@@ -439,3 +439,18 @@
 --
 #0 /var/www/sms_voting_kohana/index.php(109): Kohana_Request->execute()
 #1 {main}
+2012-02-14 14:39:01 --- ERROR: HTTP_Exception_404 [ 404 ]: Unable to find a route to match the URI: favicon.ico ~ SYSPATH/classes/kohana/request.php [ 1126 ]
+2012-02-14 14:39:01 --- STRACE: HTTP_Exception_404 [ 404 ]: Unable to find a route to match the URI: favicon.ico ~ SYSPATH/classes/kohana/request.php [ 1126 ]
+--
+#0 /var/www/sms_voting_kohana/index.php(109): Kohana_Request->execute()
+#1 {main}
+2012-02-14 15:05:40 --- ERROR: HTTP_Exception_404 [ 404 ]: Unable to find a route to match the URI: favicon.ico ~ SYSPATH/classes/kohana/request.php [ 1126 ]
+2012-02-14 15:05:40 --- STRACE: HTTP_Exception_404 [ 404 ]: Unable to find a route to match the URI: favicon.ico ~ SYSPATH/classes/kohana/request.php [ 1126 ]
+--
+#0 /var/www/sms_voting_kohana/index.php(109): Kohana_Request->execute()
+#1 {main}
+2012-02-14 15:07:07 --- ERROR: HTTP_Exception_404 [ 404 ]: Unable to find a route to match the URI: favicon.ico ~ SYSPATH/classes/kohana/request.php [ 1126 ]
+2012-02-14 15:07:07 --- STRACE: HTTP_Exception_404 [ 404 ]: Unable to find a route to match the URI: favicon.ico ~ SYSPATH/classes/kohana/request.php [ 1126 ]
+--
+#0 /var/www/sms_voting_kohana/index.php(109): Kohana_Request->execute()
+#1 {main}

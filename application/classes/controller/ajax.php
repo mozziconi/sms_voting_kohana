@@ -2,6 +2,8 @@
 
 defined('SYSPATH') or die('No direct script access.');
 
+require_once(SYSPATH.'/smsc_api.php');
+
 function testPhone()
 {
 	if(!isset($_POST['phone']))
@@ -91,6 +93,11 @@ function testAnswers()
 		throw new Exception("Неверный формат голоса.", 12);
 	return array_map('intval', explode(',',$answers));
 }
+function sendSms($phone, $message)
+{
+	$a = send_sms($phone, $message, 0, 0, 0, 0, 'rw.su');
+	return (sizeof($a) > 2);	
+}
 
 class Controller_Ajax extends Controller
 {
@@ -129,7 +136,7 @@ class Controller_Ajax extends Controller
 		// generate pin
 		$pin_code = generateCode();
 
-		//if(sendSms($phone, "Код подтверждения: $pin_code"))
+		if(sendSms($phone, "Код подтверждения: $pin_code"))
 		{
 			// new code
 			$code = new Model_Code();
@@ -143,12 +150,12 @@ class Controller_Ajax extends Controller
 			
 			return array(
 				'message' => 'Код подтверждения отправлен.',
-				'pincode' => $pin_code,
+				//'pincode' => $pin_code,
 				//'session_hash' => $session_hash,
 				);
 		}
-		//else
-		//	throw new Exception("Не удалось отправить код подтверждения.");
+		else
+			throw new Exception("Не удалось отправить код подтверждения.");
 	}
 
 	protected function vote()
