@@ -1,3 +1,9 @@
+<?php
+if(!isset($nt))
+	$nt = false;
+if(!$nt)
+{
+?>
 <!doctype html>
 <html lang="ru">
 	<head>
@@ -5,7 +11,8 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
 		<title>SMS Voting</title>
-		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css">
+		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/flick/jquery-ui.css">
+		<link rel="stylesheet" href="http://cssr.ru/simpliste/css/isimple.css">
 		<link rel="stylesheet" href="/valid8.css">
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -152,15 +159,31 @@
 					return {valid: false, message: "Код подтверждения должен состоять ровно из восьми латинских букв и цифр"};
 				}
 			}
+			// polls accordion content loader
+			function poll_accordion_content_loader(event, ui)
+			{
+				if(ui.newContent.html()=="")
+					ui.newContent.load('/poll/'+ui.newContent.attr('data-poll_id')+'?nt=1');
+                //var clicked = $(this).find('.ui-state-active');
+                //alert(clicked.html());
+                //var contentDiv = clicked.next("div");
+                //var poll_id = contentDiv.attr('data-poll_id');
+                //contentDiv.load('/poll/'+poll_id);
+			}			
 			// make ui accordion
-			function make_accordion()
+			function make_poll_accordion()
 			{
 				var options = {
 					clearStyle:true,
 					collapsible:true,
 					icons: false,
-					active: false
-				};
+					//					
+					active:false,
+					change:poll_accordion_content_loader,
+					autoHeight: false,
+					//active: false,
+					//changestart:poll_accordion_content_loader
+				}; 
 				$(this).accordion(options);
 			}
 			// go!
@@ -168,11 +191,11 @@
 				function()
 				{
 					// enable checkboxses in accordion headers
-					$(".accordion .accordion_header input").click(function(evt){evt.stopPropagation();});
+					//$(".accordion .accordion_header input").click(function(evt){evt.stopPropagation();});
 					// init ui components
 					// accordions
-					$('.answer_list').each(make_accordion);
-					$('.poll_list').each(make_accordion);
+					//$('.answer_list').each(make_accordion);
+					$('.poll_list').each(make_poll_accordion);
 					// buttons
 					$('button').button();
 					$('button').button('disable');
@@ -209,39 +232,81 @@
 		</script>
 </head>
 <body>
-<?=$content?>
-<div id="poll_dialog" style="display:none" title="Голо сование :)">
-	<input type="hidden" id="poll_id" value=""/>
-	<input type="hidden" id="answer_ids" value=""/>
-	<div id="step0">
-		<h3>Ваш выбор:</h3>
-		<ul id="choise_list"></ul>
-		<!-- captcha here!!! -->
-		<button id="step0_button">Да, я в здравом уме и твердой памяти</button>
+	<div class="container">
+		<header class="header clearfix">
+			<div class="logo">SMS Votings</div>
+			<div class="menu_main">
+				<a href="/">Текущие голосования</a>
+				<a href="/archive">Архив голосований</a>
+				<a href="/about">О проекте</a>
+			</div>
+		</header>
+		<div class="info">
+			<article class="hero clearfix">
+				<div class="col_66" id="content">
+<?php
+}
+echo $content;
+if(!$nt)
+{
+?>
+				</div>
+				<div class="col_33" id="stat">
+					<ol>
+						<li>выбрать голосование</li>
+						<li>выбрать варианты</li>
+						<li>ввести свой номер телефона</li>
+						<li>дождаться смс с кодом подтверждения</li>
+						<li>ввести код</li>
+						<li>PROFIT!!!111</li>
+					</ol>
+					<p class="center"><span class="button">Помочь деньгами или пивом :)</a></p>
+				</div>
+			</article>
+		</div>
+		<footer class="footer clearfix">
+			<div class="copyright">
+				Keep it simplest 
+				<div class="fb-like" data-href="http://cssr.ru/simpliste/ru.html" data-send="true" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
+			</div>
+			<ul class="menu_bottom">
+				<li class="active"><a href="#main">Текущие голосования</a></li>
+				<li><a href="#archive">Архив голосований</a></li>
+				<li><a href="#about">О проекте</a></li>         
+			</ul>
+		</footer>
 	</div>
-	<div id="step1" class="form" style="display:none;">
-		<p>
-			<label for="phone">Введите номер вашего сотового телефона</label>
-			<span class="w">
-				<input class="input" type="tel" id="phone" name="phone" placeholder="Номер телефона" required/>
-			</span>
-		</p>
-		<button id="step1_button">Получить код подтверждения</button>
+	<div id="poll_dialog" style="display:none" title="Голо сование :)">
+		<input type="hidden" id="poll_id" value=""/>
+		<input type="hidden" id="answer_ids" value=""/>
+		<div id="step0">
+			<h3>Ваш выбор:</h3>
+			<ul id="choise_list"></ul>
+			<!-- captcha here!!! -->
+			<button id="step0_button">Да, я в здравом уме и твердой памяти</button>
+		</div>
+		<div id="step1" class="form" style="display:none;">
+			<p>
+				<label for="phone">Введите номер вашего сотового телефона</label>
+				<span class="w">
+					<input class="input" type="tel" id="phone" name="phone" placeholder="Номер телефона" required/>
+				</span>
+			</p>
+			<button id="step1_button">Получить код подтверждения</button>
+		</div>
+		<div id="step2" class="form" style="display:none;">
+			<p>
+				<label for="code">Введите код подтверждения</label>
+				<span class="w">
+					<input class="input" type="text" id="code" name="code" placeholder="Код подтверждения" required/>
+				</span>
+			</p>
+			<button id="step2_button">Да, я человек, и это мой голос!</button>
+		</div>	
 	</div>
-	<div id="step2" class="form" style="display:none;">
-		<p>
-			<label for="code">Введите код подтверждения</label>
-			<span class="w">
-				<input class="input" type="text" id="code" name="code" placeholder="Код подтверждения" required/>
-			</span>
-		</p>
-		<button id="step2_button">Да, я человек, и это мой голос!</button>
-	</div>	
-</div>
-<!-- div id="message_box" style="display:none" title="">
-</div -->
-<!-- div id="kohana-profiler">
-<?php echo View::factory('profiler/stats') ?>
-</div -->
+
 </body>
 </html>
+<?php
+}
+?>

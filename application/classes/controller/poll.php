@@ -33,7 +33,7 @@ class Controller_Poll extends Controller_Template
 		$view->poll = ORM::factory('poll',$id);
 			
 		//render view
-		//$this->response->body($view);
+		$this->template->nt = isset($_GET['nt']);
 		$this->template->content = $view;
 	}
 }
