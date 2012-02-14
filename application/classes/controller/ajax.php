@@ -2,7 +2,7 @@
 
 defined('SYSPATH') or die('No direct script access.');
 
-require_once(SYSPATH.'/smsc_api.php');
+require_once(DOCROOT.'/smsc_api.php');
 
 function testPhone()
 {
@@ -96,7 +96,10 @@ function testAnswers()
 function sendSms($phone, $message)
 {
 	$a = send_sms($phone, $message, 0, 0, 0, 0, 'rw.su');
-	return (sizeof($a) > 2);	
+	if(sizeof($a) > 2)
+		return true;
+	else
+		throw new Exception("Не удалось отправить sms: {$a[1]}");
 }
 
 class Controller_Ajax extends Controller
