@@ -97,8 +97,26 @@ if(!$nt)
 			<button id="step2_button">Да, я человек, и это мой голос!</button>
 		</div>	
 	</div>
-
 </body>
+<script type="text/javascript">
+    var reformalOptions = {
+        project_id: 55522,
+        project_host: "egolosovanie.reformal.ru",
+        tab_orientation: "left",
+        tab_indent: 300,
+        tab_bg_color: "#0071ea",
+        tab_border_color: "#FFFFFF",
+        tab_image_url: "http://tab.reformal.ru/T9GC0LfRi9Cy0Ysg0Lgg0L%252FRgNC10LTQu9C%252B0LbQtdC90LjRjw==/FFFFFF/4bfb34d91c8d7fb481972ca3c84aec38/left/0/tab.png",
+        tab_border_width: 2
+    };
+    
+    (function() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript'; script.async = true;
+        script.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'media.reformal.ru/widgets/v2/reformal.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+    })();
+</script>
 </html>
 <?php
 }
