@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Фев 13 2012 г., 09:16
+-- Время создания: Фев 16 2012 г., 00:49
 -- Версия сервера: 5.1.58
--- Версия PHP: 5.3.6-13ubuntu3.5
+-- Версия PHP: 5.3.6-13ubuntu3.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -30,11 +30,77 @@ DROP TABLE IF EXISTS `answers`;
 CREATE TABLE IF NOT EXISTS `answers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `poll_id` int(11) NOT NULL,
+  `rating` int(10) unsigned NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
   `description` text,
   PRIMARY KEY (`id`),
-  KEY `poll_id` (`poll_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  KEY `poll_id` (`poll_id`),
+  KEY `rating` (`rating`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=57 ;
+
+--
+-- Дамп данных таблицы `answers`
+--
+
+INSERT INTO `answers` (`id`, `poll_id`, `rating`, `title`, `image_url`, `url`, `description`) VALUES
+(1, 1, 0, 'вариант 1', NULL, NULL, 'описание варианта 1'),
+(2, 1, 0, 'вариант 2', NULL, NULL, 'описание варианта 2'),
+(3, 1, 0, 'вариант 3', NULL, NULL, NULL),
+(4, 1, 0, 'вариант 4', NULL, NULL, NULL),
+(5, 1, 0, 'вариант 5', NULL, NULL, NULL),
+(6, 1, 0, 'вариант 6', NULL, NULL, NULL),
+(7, 2, 0, 'вариант 1', NULL, NULL, 'описание варианта 1'),
+(8, 2, 0, 'вариант 2', NULL, NULL, 'описание варианта 2'),
+(9, 2, 0, 'вариант 3', NULL, NULL, 'описание варианта 3'),
+(10, 2, 0, 'вариант 4', NULL, NULL, 'описание варианта 4'),
+(11, 2, 0, 'вариант 5', NULL, NULL, 'описание варианта 5'),
+(12, 2, 0, 'вариант 6', NULL, NULL, 'описание варианта 6'),
+(13, 2, 0, 'вариант 7', NULL, NULL, 'описание варианта 7'),
+(14, 2, 0, 'вариант 8', NULL, NULL, 'описание варианта 8'),
+(15, 2, 0, 'вариант 9', NULL, NULL, 'описание варианта 9'),
+(16, 2, 0, 'вариант 10', NULL, NULL, 'описание варианта 10'),
+(17, 2, 0, 'вариант 11', NULL, NULL, 'описание варианта 11'),
+(18, 2, 0, 'вариант 12', NULL, NULL, 'описание варианта 12'),
+(19, 2, 0, 'вариант 13', NULL, NULL, 'описание варианта 13'),
+(20, 2, 0, 'вариант 14', NULL, NULL, 'описание варианта 14'),
+(21, 2, 0, 'вариант 15', NULL, NULL, 'описание варианта 15'),
+(22, 2, 0, 'вариант 16', NULL, NULL, 'описание варианта 16'),
+(23, 2, 0, 'вариант 17', NULL, NULL, 'описание варианта 17'),
+(24, 2, 0, 'вариант 18', NULL, NULL, 'описание варианта 18'),
+(25, 2, 0, 'вариант 19', NULL, NULL, 'описание варианта 19'),
+(26, 2, 0, 'вариант 20', NULL, NULL, NULL),
+(27, 2, 0, 'вариант 20', NULL, NULL, NULL),
+(28, 2, 0, 'вариант 21', NULL, NULL, NULL),
+(29, 2, 0, 'вариант 22', NULL, NULL, NULL),
+(30, 2, 0, 'вариант 23', NULL, NULL, NULL),
+(31, 2, 0, 'вариант 24', NULL, NULL, NULL),
+(32, 2, 0, 'вариант 25', NULL, NULL, NULL),
+(33, 2, 0, 'вариант 26', NULL, NULL, NULL),
+(34, 2, 0, 'вариант 27', NULL, NULL, NULL),
+(35, 2, 0, 'вариант 28', NULL, NULL, NULL),
+(36, 2, 0, 'вариант 29', NULL, NULL, NULL),
+(37, 2, 0, 'вариант 30', NULL, NULL, NULL),
+(38, 2, 0, 'вариант 31', NULL, NULL, NULL),
+(39, 2, 0, 'вариант 32', NULL, NULL, NULL),
+(40, 2, 0, 'вариант 33', NULL, NULL, NULL),
+(41, 2, 0, 'вариант 34', NULL, NULL, NULL),
+(42, 2, 0, 'вариант 35', NULL, NULL, NULL),
+(43, 2, 0, 'вариант 36', NULL, NULL, NULL),
+(44, 2, 0, 'вариант 37', NULL, NULL, NULL),
+(45, 2, 0, 'вариант 38', NULL, NULL, NULL),
+(46, 2, 0, 'вариант 39', NULL, NULL, NULL),
+(47, 2, 0, 'вариант 40', NULL, NULL, NULL),
+(48, 2, 0, 'вариант 41', NULL, NULL, NULL),
+(49, 2, 0, 'вариант 42', NULL, NULL, NULL),
+(50, 2, 0, 'вариант 43', NULL, NULL, NULL),
+(51, 2, 0, 'вариант 44', NULL, NULL, NULL),
+(52, 2, 0, 'вариант 45', NULL, NULL, NULL),
+(53, 2, 0, 'вариант 46', NULL, NULL, NULL),
+(54, 2, 0, 'вариант 47', NULL, NULL, NULL),
+(55, 2, 0, 'вариант 48', NULL, NULL, NULL),
+(56, 2, 0, 'вариант 49', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -54,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `codes` (
   `session_hash` varchar(32) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `poll_id` (`poll_id`,`code`),
-  UNIQUE KEY `phone_hash` (`phone_id`)
+  KEY `phone_id` (`phone_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -204,17 +270,46 @@ DROP TABLE IF EXISTS `polls`;
 CREATE TABLE IF NOT EXISTS `polls` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
   `description` text,
   `start_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `end_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `end_date` timestamp NULL DEFAULT NULL,
   `active` tinyint(4) NOT NULL DEFAULT '1',
   `max_answers_per_vote` int(11) NOT NULL DEFAULT '1',
-  `region_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`),
-  KEY `active` (`active`),
-  KEY `region_id` (`region_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  KEY `active` (`active`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Дамп данных таблицы `polls`
+--
+
+INSERT INTO `polls` (`id`, `title`, `image_url`, `url`, `description`, `start_date`, `end_date`, `active`, `max_answers_per_vote`) VALUES
+(1, 'тестовое голосование', NULL, NULL, 'описание тестового голосования 1', '2012-02-01 07:14:22', '2012-02-28 20:00:00', 1, 3),
+(2, 'тестовое голосование 2', NULL, NULL, 'описание тестового голосования 2', '2012-02-01 07:14:22', '2012-02-28 20:00:00', 1, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `polls_regions`
+--
+
+DROP TABLE IF EXISTS `polls_regions`;
+CREATE TABLE IF NOT EXISTS `polls_regions` (
+  `poll_id` int(11) NOT NULL,
+  `region_id` int(11) NOT NULL,
+  KEY `poll_id` (`poll_id`,`region_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `polls_regions`
+--
+
+INSERT INTO `polls_regions` (`poll_id`, `region_id`) VALUES
+(1, 61),
+(2, 34);
 
 -- --------------------------------------------------------
 
@@ -3361,9 +3456,15 @@ CREATE TABLE IF NOT EXISTS `votes` (
   `phone_id` int(11) NOT NULL,
   `code_id` int(11) NOT NULL,
   `poll_id` int(11) NOT NULL,
+  `region_id` int(11) NOT NULL,
   `answer_id` int(11) NOT NULL,
   `weight` double NOT NULL,
-  PRIMARY KEY (`id`)
+  `canceled` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `region_id` (`region_id`),
+  KEY `canceled` (`canceled`),
+  KEY `poll_id` (`poll_id`),
+  KEY `phone_id` (`phone_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

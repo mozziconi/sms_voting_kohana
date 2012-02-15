@@ -15,6 +15,10 @@ class Model_Vote extends ORM
 		   'model'         => 'poll',
 		   'foreign_key' => 'poll_id',
 			),
+		'region'    => array(
+		   'model'         => 'region',
+		   'foreign_key' => 'region_id',
+			),
 		'answer'    => array(
 		   'model'         => 'answer',
 		   'foreign_key' => 'answer_id',

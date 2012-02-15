@@ -7,9 +7,9 @@ class Model_Code extends ORM
 		   'model'         => 'phone',
 		   'foreign_key' => 'phone_id',
 			),
-		'vote'    => array(
-		   'model'         => 'vote',
-		   'foreign_key' => 'vote_id',
+		'poll'    => array(
+		   'model'         => 'poll',
+		   'foreign_key' => 'poll_id',
 			),
 		);
 };

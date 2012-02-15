@@ -164,6 +164,63 @@ function make_poll_accordion()
 	}; 
 	$(this).accordion(options);
 }
+// search and scroll to answer
+function searchAnswer(poll_id)
+{
+	console.log(1111);
+	var str = $('#poll_'+poll_id+'_search').val();
+	console.log(1111);
+	var answers = $('div[data-poll_id'+poll_id+'][data-title*="'+str+'"]');
+	console.log(1111);
+	if(ansvers.length)
+		$("html,body").animate({scrollTop: $(answers.first()).offset().top}, 1000);
+	else
+		alert('Не удалось найти "'+str+'"');
+}
+//sort answers
+function sortAlphAsc(a, b)
+{
+	return $(a).attr('data-title') > $(b).attr('data-title') ? 1 : -1;
+}
+function sortRatingAsc(a, b)
+{
+	return $(a).attr('data-rating') > $(b).attr('data-rating') ? 1 : -1;
+}
+function sortAlphDesc(a, b)
+{
+	return $(a).attr('data-title') < $(b).attr('data-title') ? 1 : -1;
+}
+function sortRatingDesc(a, b)
+{
+	return $(a).attr('data-rating') < $(b).attr('data-rating') ? 1 : -1;
+}
+
+function sortAnswers()
+{
+	var poll_id = $(this).attr('data-poll_id');
+	var type = parseInt($('#poll_'+poll_id+'_sort').val());
+	var order = parseInt($('#poll_'+poll_id+'_sort_order').val());
+	var f = null;
+	switch(type+order)
+	{
+		case 0:
+			f = sortAlphAsc;
+			break;
+		case 1:
+			f = sortRatingAsc;
+			break;
+		case 2:
+			f = sortAlphDesc;
+			break;
+		case 3:
+			f = sortRatingDesc;
+			break;
+	};
+	if(f)
+	{
+		$('div[data-poll_id="'+poll_id+'"]').sortElements(f);
+	}
+}
 // go!
 $(document).ready(
 	function()

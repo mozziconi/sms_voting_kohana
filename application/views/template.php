@@ -3,8 +3,7 @@ if(!isset($nt))
 	$nt = false;
 if(!$nt)
 {
-?>
-<!doctype html>
+?><!doctype html>
 <html lang="ru">
 	<head>
 		<meta charset="utf-8">
@@ -19,6 +18,8 @@ if(!$nt)
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 		<script src="/jquery.maskedinput.min.js"></script>
 		<script src="/jquery.valid8.js"></script>
+		<script src="/jquery.sorting.js"></script>
+		<script src="/jquery.scrollTo-min.js"></script>		
 		<script src="/voting.js"></script>
 </head>
 <body>
@@ -50,7 +51,7 @@ if(!$nt)
 						<li>ввести код</li>
 						<li>PROFIT!!!111</li>
 					</ol>
-					<div>
+					<div class="not_for_profit">
 						<table border="0" cellpadding="0" cellspacing="0"><tr><td><div style="padding: 0.6em; background-color: #DAE6F2; border: 1px solid #B8CFE6; border-radius: 7px; -moz-border-radius: 7px;"><a href="https://money.yandex.ru/embed/?from=sbal" title="Виджеты Яндекс.Денег" style="width: 200px; height: 100px; display: block; margin-bottom: 0.6em; background: url('https://money.yandex.ru/share-balance.xml?id=153598173&key=0006EE96EE457DEA') 0 0 no-repeat; -background: none; -filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://money.yandex.ru/share-balance.xml?id=153598173&key=0006EE96EE457DEA', sizingMethod = 'crop');"></a><form action="https://money.yandex.ru/direct-payment.xml" method="post"><input type="hidden" name="receiver" value="410011287869310"/><input type="hidden" name="sum" value="0"/><input type="hidden" name="destination" value="Яндекс.Деньги &#8212; на хорошее дело не жалко!"/><input type="hidden" name="FormComment" value="Пожертвование через виджет &#171Мой баланс&#187;"/><input type="submit" value="Поддержать проект" style="margin-top: 0.6em; width: 100%;"/></form></div></td></tr></table>
 					</div>
 				</div>

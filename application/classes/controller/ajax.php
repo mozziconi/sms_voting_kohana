@@ -73,7 +73,8 @@ function getCode($phone_id, $poll_id, $pin_code, $session_hash)
 	$code = new Model_Code();
 	$code ->where('phone_id', '<=',$phone_id)
 		->where('poll_id', '>=', $poll_id)
-		->where('used_time','=', null)
+		//->where('used_time','=', null)
+		//->where('used','=', 0)
 		->where('code','=', $pin_code)
 		->where('session_hash','=', $session_hash)
 		->find();
@@ -95,7 +96,7 @@ function testAnswers()
 }
 function sendSms($phone, $message)
 {
-	$a = send_sms($phone, $message, 0, 0, 0, 0, 'rw.su');
+	$a = send_sms($phone, $message);
 	if(sizeof($a) > 2)
 		return true;
 	else
@@ -118,8 +119,9 @@ class Controller_Ajax extends Controller
 		{
 			$range = getRange($raw_phone);
 			// check region
-			if($poll->region_id != $range->region_id)
-				throw new Exception("Ваш номер телефона не относится к региону, в котром проводится это голосование.", 6);
+			//if($poll->region_id != $range->region_id)
+			if(!($poll->regions->where('id','=',$range->region_id)->count_all()))
+				throw new Exception("Ваш номер телефона не относится к региону, в котором проводится это голосование.", 6);
 			// create phone record
 			$phone->range_id = $range->id;
 			$phone->md5_phone = $md5_phone;
@@ -129,17 +131,18 @@ class Controller_Ajax extends Controller
 		{
 			$range = $phone->range;
 			// check region
-			if($poll->region_id != $range->region_id)
+			//if($poll->region_id != $range->region_id)
+			if(!($poll->regions->where('id','=',$range->region_id)->count_all()))
 				throw new Exception("Ваш номер телефона не относится к региону, в котром проводится это голосование.", 6);
 		}
-		// поиск ранее сгенерированных кодов. нашли - до свиания
+		// поиск ранее сгенерированных неактивированных кодов. нашли - до свиания
 		$session_hash = md5($session->id().$poll->id);
-		if($phone->codes->where('session_hash', '=', $session_hash)->where('used', '=', 0)->count_all())
+		if($phone->codes->where('session_hash', '=', $session_hash)->where('used', '=', 0)->where('used_time','=',null)->count_all())
 			throw new Exception("Мы уже отправили вам код, что же вы его не вводите?", 7);
 		// generate pin
 		$pin_code = generateCode();
 
-		//if(sendSms($phone, "Код подтверждения: $pin_code"))
+		if(sendSms($phone, "Код подтверждения: $pin_code"))
 		{
 			// new code
 			$code = new Model_Code();
@@ -153,12 +156,12 @@ class Controller_Ajax extends Controller
 			
 			return array(
 				'message' => 'Код подтверждения отправлен.',
-				'pincode' => $pin_code,
+				//'pincode' => $pin_code,
 				//'session_hash' => $session_hash,
 				);
 		}
-		//else
-		//	throw new Exception("Не удалось отправить код подтверждения.");
+		else
+			throw new Exception("Не удалось отправить код подтверждения.");
 	}
 
 	protected function vote()
@@ -182,11 +185,14 @@ class Controller_Ajax extends Controller
 		if(!$phone->loaded())
 			throw new Exception("Алярм, алярм, попытка воспользоваться чужим кодом!", 14);
 		$code = getCode($phone->id, $poll->id, $pin_code, $session_hash);
+		if($code->used or $code->used_time)
+			throw new Exception("Вы уже вводили этот код!", 15);
 		// если мы дошли досюда, значит, все ок, проверяем голос.
 		// проверка на лишние голоса и на голоса не от тех опросов
 		foreach($answers_ids as $answer_id)
 			if(!$poll->answers->where('id', '=', $answer_id)->count_all())
 				throw new Exception("Неверный формат голоса.", 12);
+		// 
 		shuffle($answers_ids)	;
 		foreach($answers_ids as $answer_id)
 		{
@@ -199,6 +205,7 @@ class Controller_Ajax extends Controller
 			$vote->save();
 		}
 		$code->used_time = date('Y-m-d H:i:s', time());
+		$code->used = 1;
 		$code->save();
 		$session->delete($session_hash);
 		return array('message' => "Ваш голос учтен.");
