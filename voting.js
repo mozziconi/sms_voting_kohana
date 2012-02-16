@@ -142,11 +142,6 @@ function poll_accordion_content_loader(event, ui)
 {
 	if(ui.newContent.html()=="")
 		ui.newContent.load('/poll/'+ui.newContent.attr('data-poll_id')+'?nt=1');
-	//var clicked = $(this).find('.ui-state-active');
-	//alert(clicked.html());
-	//var contentDiv = clicked.next("div");
-	//var poll_id = contentDiv.attr('data-poll_id');
-	//contentDiv.load('/poll/'+poll_id);
 }			
 // make ui accordion
 function make_poll_accordion()

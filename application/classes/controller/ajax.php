@@ -142,7 +142,7 @@ class Controller_Ajax extends Controller
 		// generate pin
 		$pin_code = generateCode();
 
-		if(sendSms($raw_phone, "Код подтверждения: $pin_code"))
+		//if(sendSms($raw_phone, "Код подтверждения: $pin_code"))
 		{
 			// new code
 			$code = new Model_Code();
@@ -156,12 +156,12 @@ class Controller_Ajax extends Controller
 			
 			return array(
 				'message' => 'Код подтверждения отправлен.',
-				//'pincode' => $pin_code,
+				'pincode' => $pin_code,
 				//'session_hash' => $session_hash,
 				);
 		}
-		else
-			throw new Exception("Не удалось отправить код подтверждения.");
+		//else
+		//	throw new Exception("Не удалось отправить код подтверждения.");
 	}
 
 	protected function vote()
@@ -189,26 +189,67 @@ class Controller_Ajax extends Controller
 			throw new Exception("Вы уже вводили этот код!", 15);
 		// если мы дошли досюда, значит, все ок, проверяем голос.
 		// проверка на лишние голоса и на голоса не от тех опросов
+		$answers_ids = array_unique($answers_ids);
 		foreach($answers_ids as $answer_id)
 			if(!$poll->answers->where('id', '=', $answer_id)->count_all())
 				throw new Exception("Неверный формат голоса.", 12);
-		// 
-		shuffle($answers_ids)	;
-		foreach($answers_ids as $answer_id)
-		{
-			$vote = new Model_Vote();
-			$vote->phone_id = $phone->id;
-			$vote->code_id = $code->id;
-			$vote->poll_id = $poll->id;
-			$vote->answer_id = $answer_id;
-			$vote->weight = 1; // for rating votes, temporarly
-			$vote->save();
+		// get previews votes
+		$prev_votes = ORM::factory('vote')
+			->where('phone_id','=',$phone->id)
+			->where('poll_id','=',$poll->id)
+			->where('canceled','=',0)
+			->find_all();		
+		// Start the transaction
+		$db = Database::instance();
+		$db->begin();
+		try
+		{		
+			$prew_answers_ids = array();
+			foreach($prev_votes as $prev_vote)
+			{
+				$prew_answers_ids[] = $prev_vote->answer_id;
+				if(!in_array($prev_vote->answer_id, $answers_ids))
+				// кандидата нет среди новых кандидатов - отменяем голос, декрементим рейтинг
+				{
+					$answer = $prev_vote->answer;
+					$prev_vote->canceled = 1;
+					$prev_vote->save();
+					DB::update('answers')
+						->set(array('rating' => DB::expr('`rating` - 1')))
+						->where('id', '=', $prev_vote->answer_id)
+						->execute();
+				};
+			};
+			$answers_to_add = array_diff($answers_ids, $prew_answers_ids); // новые голоса
+			foreach($answers_to_add as $answer_id)
+			{
+				DB::update('answers')
+					->set(array('rating' => DB::expr('`rating` + 1')))
+					->where('id', '=', $answer_id)
+					->execute();
+				
+				$vote = new Model_Vote();
+				$vote->phone_id = $phone->id;
+				$vote->code_id = $code->id;
+				$vote->poll_id = $poll->id;
+				$vote->answer_id = $answer_id;
+				$vote->weight = 1; // for rating votes, temporarly
+				$vote->save();
+			}
+			$code->used_time = date('Y-m-d H:i:s', time());
+			$code->used = 1;
+			$code->save();
+			$session->delete($session_hash);
+			// commit
+			$db->commit();
+			return array('message' => "Ваш голос учтен.");
 		}
-		$code->used_time = date('Y-m-d H:i:s', time());
-		$code->used = 1;
-		$code->save();
-		$session->delete($session_hash);
-		return array('message' => "Ваш голос учтен.");
+		catch(Exception $e)
+		{
+			//rollback
+			$db->rollback();
+			throw $e;
+		}
 	}
 	
 	public function action_index()

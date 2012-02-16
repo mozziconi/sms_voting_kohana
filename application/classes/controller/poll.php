@@ -29,8 +29,13 @@ class Controller_Poll extends Controller_Template
 		// create view instance
 		$view = View::factory('poll/item');
 		// time());
-		
-		$view->poll = ORM::factory('poll',$id);
+
+		$poll = ORM::factory('poll',$id);
+		$view->poll = $poll;
+		$view->votes = $poll->votes
+			->order_by('created','desc')
+			->limit(100)
+			->find_all();
 			
 		//render view
 		$this->template->nt = isset($_GET['nt']);

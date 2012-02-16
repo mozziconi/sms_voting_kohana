@@ -11,9 +11,6 @@
 			$answers = $poll->answers->order_by('title','asc')->find_all();
 			echo View::factory('answer/list') ->bind('answers', $answers)->bind('poll',$poll);
 		?>
-		<div>
-			<button onclick="vote(<?=$poll->id?>);" data-poll_id="<?=$poll->id?>">Vote</button>
-		</div>
 	</div>
 	<div id="poll_<?=$poll->id?>_tabs-2">
 		<?=$poll->description?>
@@ -32,7 +29,25 @@
 		</ul>
 	</div>
 	<div id="poll_<?=$poll->id?>_tabs-4">
-		Здесь будет лог голосования
+		<table width="100%">
+			<tr>
+				<th align="center">Хэш номера телефона</th>
+				<th align="center">Кандидат</th>
+				<th align="center">Дата и время</th>
+			</tr>
+		<?php
+			foreach($votes as $vote)
+			{
+			?>
+			<tr>
+				<td align="center"><?=$vote->phone->md5_phone?></td>
+				<td align="center"><?=$vote->canceled?'<s>':''?><?=$vote->answer->title?><?=$vote->canceled?'</s>':''?></td>
+				<td align="center"><?=$vote->created?></td>
+			</tr>
+			<?php
+			}
+		?>
+		</table>
 	</div>
 </div>
 <script>

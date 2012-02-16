@@ -1,4 +1,4 @@
-<table class="answers_header">
+<table class="answers_header" width="100%">
 	<tr>
 		<td>
 			<input id="poll_<?=$poll->id?>_search" type="text" placeholer="Поиск кандадата"/>
@@ -16,6 +16,11 @@
 				<option value="2">обратном</option>
 			</select>
 			порядке
+		</td>
+	</tr>
+	<tr>
+		<td width="100%" align="right" colspan="2">
+			<button onclick="vote(<?=$poll->id?>);" data-poll_id="<?=$poll->id?>">Голосую</button>
 		</td>
 	</tr>
 </table>
