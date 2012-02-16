@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Фев 16 2012 г., 00:49
+-- Время создания: Фев 17 2012 г., 00:38
 -- Версия сервера: 5.1.58
 -- Версия PHP: 5.3.6-13ubuntu3.6
 
@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS `answers` (
 INSERT INTO `answers` (`id`, `poll_id`, `rating`, `title`, `image_url`, `url`, `description`) VALUES
 (1, 1, 0, 'вариант 1', NULL, NULL, 'описание варианта 1'),
 (2, 1, 0, 'вариант 2', NULL, NULL, 'описание варианта 2'),
-(3, 1, 0, 'вариант 3', NULL, NULL, NULL),
-(4, 1, 0, 'вариант 4', NULL, NULL, NULL),
+(3, 1, 1, 'вариант 3', NULL, NULL, NULL),
+(4, 1, 1, 'вариант 4', NULL, NULL, NULL),
 (5, 1, 0, 'вариант 5', NULL, NULL, NULL),
 (6, 1, 0, 'вариант 6', NULL, NULL, NULL),
 (7, 2, 0, 'вариант 1', NULL, NULL, 'описание варианта 1'),
@@ -3460,6 +3460,7 @@ CREATE TABLE IF NOT EXISTS `votes` (
   `answer_id` int(11) NOT NULL,
   `weight` double NOT NULL,
   `canceled` tinyint(4) NOT NULL DEFAULT '0',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `region_id` (`region_id`),
   KEY `canceled` (`canceled`),
