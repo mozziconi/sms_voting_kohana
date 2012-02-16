@@ -142,7 +142,7 @@ class Controller_Ajax extends Controller
 		// generate pin
 		$pin_code = generateCode();
 
-		if(sendSms($phone, "Код подтверждения: $pin_code"))
+		if(sendSms($raw_phone, "Код подтверждения: $pin_code"))
 		{
 			// new code
 			$code = new Model_Code();
