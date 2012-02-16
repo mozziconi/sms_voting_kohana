@@ -142,7 +142,7 @@ class Controller_Ajax extends Controller
 		// generate pin
 		$pin_code = generateCode();
 
-		//if(sendSms($raw_phone, "Код подтверждения: $pin_code"))
+		if(sendSms($raw_phone, "Код подтверждения: $pin_code"))
 		{
 			// new code
 			$code = new Model_Code();
@@ -156,12 +156,12 @@ class Controller_Ajax extends Controller
 			
 			return array(
 				'message' => 'Код подтверждения отправлен.',
-				'pincode' => $pin_code,
+				//'pincode' => $pin_code,
 				//'session_hash' => $session_hash,
 				);
 		}
-		//else
-		//	throw new Exception("Не удалось отправить код подтверждения.");
+		else
+			throw new Exception("Не удалось отправить код подтверждения.");
 	}
 
 	protected function vote()
