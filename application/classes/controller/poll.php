@@ -11,6 +11,7 @@ class Controller_Poll extends Controller_Template
 		$timestamp = date('Y-m-d H:i:s', time());
 		
 		$view->polls = ORM::factory('poll')
+			->where('active','=',1)
 			->where('start_date','<=',$timestamp)
 			->or_where_open()
 			->where('end_date','>',$timestamp)
@@ -24,6 +25,34 @@ class Controller_Poll extends Controller_Template
 	}
 	public function action_archive()
 	{
+		// create view instance
+		$view = View::factory('poll/list');
+		//
+		$timestamp = date('Y-m-d H:i:s', time());
+		
+		$view->polls = ORM::factory('poll')
+			->or_where_open()
+			->where('active','=',0)
+			->where('end_date','<',$timestamp)
+			->or_where_close()
+			->order_by('start_date','desc')
+			->find_all();
+		$this->template->title = 'Архив голосований';
+		$this->template->content = $view;
+	}
+	public function action_future()
+	{
+		// create view instance
+		$view = View::factory('poll/list');
+		//
+		$timestamp = date('Y-m-d H:i:s', time());
+		
+		$view->polls = ORM::factory('poll')
+			->where('start_date','>',$timestamp)
+			->order_by('start_date','desc')
+			->find_all();
+		$this->template->title = 'Будущие голосования';
+		$this->template->content = $view;
 	}
 	public function action_poll()
 	{

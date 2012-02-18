@@ -124,8 +124,23 @@ Route::set('poll_by_id', 'poll(/<id>(/<view>))', array('id' => '\d+', 'view' => 
 		'controller' => 'poll',
 		'action'     => 'poll',
 	));
-Route::set('default', '') //'(<controller>(/<action>(/<id>)))'
+Route::set('actual_polls', '') //'(<controller>(/<action>(/<id>)))'
 	->defaults(array(
 		'controller' => 'poll',
 		'action'     => 'actual',
+	));
+Route::set('future_polls', 'future') //'(<controller>(/<action>(/<id>)))'
+	->defaults(array(
+		'controller' => 'poll',
+		'action'     => 'future',
+	));
+Route::set('archive_polls', 'archive') //'(<controller>(/<action>(/<id>)))'
+	->defaults(array(
+		'controller' => 'poll',
+		'action'     => 'archive',
+	));
+Route::set('about', 'about') //'(<controller>(/<action>(/<id>)))'
+	->defaults(array(
+		'controller' => 'about',
+		'action'     => 'index',
 	));
