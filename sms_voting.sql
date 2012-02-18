@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Фев 17 2012 г., 00:38
+-- Время создания: Фев 18 2012 г., 19:53
 -- Версия сервера: 5.1.58
 -- Версия PHP: 5.3.6-13ubuntu3.6
 
@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS `answers` (
 INSERT INTO `answers` (`id`, `poll_id`, `rating`, `title`, `image_url`, `url`, `description`) VALUES
 (1, 1, 0, 'вариант 1', NULL, NULL, 'описание варианта 1'),
 (2, 1, 0, 'вариант 2', NULL, NULL, 'описание варианта 2'),
-(3, 1, 1, 'вариант 3', NULL, NULL, NULL),
-(4, 1, 1, 'вариант 4', NULL, NULL, NULL),
+(3, 1, 0, 'вариант 3', NULL, NULL, NULL),
+(4, 1, 0, 'вариант 4', NULL, NULL, NULL),
 (5, 1, 0, 'вариант 5', NULL, NULL, NULL),
 (6, 1, 0, 'вариант 6', NULL, NULL, NULL),
 (7, 2, 0, 'вариант 1', NULL, NULL, 'описание варианта 1'),
@@ -113,13 +113,13 @@ CREATE TABLE IF NOT EXISTS `codes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `poll_id` int(11) NOT NULL,
   `phone_id` int(11) NOT NULL,
-  `code` varchar(16) NOT NULL,
+  `md5_code` varchar(32) NOT NULL,
   `used` tinyint(4) NOT NULL DEFAULT '0',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `used_time` timestamp NULL DEFAULT NULL,
   `session_hash` varchar(32) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `poll_id` (`poll_id`,`code`),
+  UNIQUE KEY `poll_id` (`poll_id`,`md5_code`),
   KEY `phone_id` (`phone_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -253,11 +253,13 @@ DROP TABLE IF EXISTS `phones`;
 CREATE TABLE IF NOT EXISTS `phones` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `range_id` int(11) NOT NULL,
+  `region_id` int(11) NOT NULL,
   `md5_phone` varchar(32) NOT NULL,
   `checked` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `md5_phone` (`md5_phone`),
-  KEY `range_id` (`range_id`)
+  KEY `range_id` (`range_id`),
+  KEY `region_id` (`region_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------

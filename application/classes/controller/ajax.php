@@ -49,10 +49,12 @@ function getRange($phone)
 
 function generateCode()
 {
-	$chars = str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789');
 	$code = '';
+	//$chars = str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789');
+	//for($i=0; $i < 8; $i++)
+	//	$code .= $chars{mt_rand(0,61)};
 	for($i=0; $i < 8; $i++)
-		$code .= $chars{mt_rand(0,61)};
+		$code .= mt_rand(0,9);
 	return $code;
 }
 
@@ -63,7 +65,9 @@ function testCode()
 	$code = $_POST['code'];
 	if(!$code)
 		throw new Exception("Не указан код подтверждения.", 8);
-	if(!preg_match('/^[a-zA-Z\d]{8}$/',$code))
+	//if(!preg_match('/^[a-zA-Z\d]{8}$/',$code))
+	//	throw new Exception("Неверный формат кода подтверждения.", 9);
+	if(!preg_match('/^\d{8}$/',$code))
 		throw new Exception("Неверный формат кода подтверждения.", 9);
 	return $code;
 }
@@ -75,7 +79,7 @@ function getCode($phone_id, $poll_id, $pin_code, $session_hash)
 		->where('poll_id', '>=', $poll_id)
 		//->where('used_time','=', null)
 		//->where('used','=', 0)
-		->where('code','=', $pin_code)
+		->where('md5_code','=', md5($pin_code))
 		->where('session_hash','=', $session_hash)
 		->find();
 	if(!$code->loaded())
@@ -124,6 +128,7 @@ class Controller_Ajax extends Controller
 				throw new Exception("Ваш номер телефона не относится к региону, в котором проводится это голосование.", 6);
 			// create phone record
 			$phone->range_id = $range->id;
+			$phone->region_id = $range->region_id;
 			$phone->md5_phone = $md5_phone;
 			$phone->save();
 		}
@@ -148,7 +153,7 @@ class Controller_Ajax extends Controller
 			$code = new Model_Code();
 			$code->poll_id = $poll_id;
 			$code->phone_id = $phone->id;
-			$code->code = $pin_code;
+			$code->md5_code = md5($pin_code);
 			$code->session_hash = $session_hash;
 			$code->save();
 			
@@ -233,6 +238,7 @@ class Controller_Ajax extends Controller
 				$vote->code_id = $code->id;
 				$vote->poll_id = $poll->id;
 				$vote->answer_id = $answer_id;
+				$vote->region_id = $phone->region_id;
 				$vote->weight = 1; // for rating votes, temporarly
 				$vote->save();
 			}

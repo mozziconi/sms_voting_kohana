@@ -119,12 +119,12 @@ Route::set('ajax_method', 'ajax/<method>', array('method' => '.+'))
 		'controller' => 'ajax',
 		'action'     => 'index',
 	));
-Route::set('poll_by_id', 'poll/<id>', array('id' => '.+'))
+Route::set('poll_by_id', 'poll(/<id>(/<view>))', array('id' => '\d+', 'view' => '[a-z]+'))
 	->defaults(array(
 		'controller' => 'poll',
 		'action'     => 'poll',
 	));
-Route::set('default', '(<controller>(/<action>(/<id>)))')
+Route::set('default', '') //'(<controller>(/<action>(/<id>)))'
 	->defaults(array(
 		'controller' => 'poll',
 		'action'     => 'actual',

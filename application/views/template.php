@@ -9,7 +9,7 @@ if(!$nt)
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
-		<title>SMS Voting</title>
+		<title>Электронные голосования<?=$title?" - $title":''?></title>
 		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/flick/jquery-ui.css">
 		<link rel="stylesheet" href="http://cssr.ru/simpliste/css/isimple.css">
 		<link rel="stylesheet" href="/valid8.css">
@@ -27,6 +27,7 @@ if(!$nt)
 		<header class="header clearfix">
 			<div class="logo">SMS Votings</div>
 			<div class="menu_main">
+				<a href="/future">Будущие голосования</a>
 				<a href="/">Текущие голосования</a>
 				<a href="/archive">Архив голосований</a>
 				<a href="/about">О проекте</a>

@@ -126,7 +126,7 @@ function testPhone(values)
 }
 function testCode(values)
 {
-	if(/^[a-zA-Z\d]{8}$/.test(values.code))
+	if(/^\d{8}$/.test(values.code))
 	{
 		$('#step2_button').button('enable');
 		return {valid: true};
@@ -134,7 +134,7 @@ function testCode(values)
 	else
 	{
 		$('#step2_button').button('disable');
-		return {valid: false, message: "Код подтверждения должен состоять ровно из восьми латинских букв и цифр"};
+		return {valid: false, message: "Код подтверждения должен состоять ровно из восьми цифр"};
 	}
 }
 // polls accordion content loader
