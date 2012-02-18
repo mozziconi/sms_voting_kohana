@@ -5,7 +5,7 @@
 	<ul>
 		<li><a href="/poll/<?=$poll->id?>/answers">Варианты</a></li>
 		<li><a href="/poll/<?=$poll->id?>/description">Описание</a></li>
-		<li><a href="poll/<?=$poll->id?>/regions">Регионы</a></li>
+		<li><a href="/poll/<?=$poll->id?>/regions">Регионы</a></li>
 		<li><a href="/poll/<?=$poll->id?>/log">Лог голосования</a></li>
 	</ul>
 </div>

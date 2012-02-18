@@ -118,7 +118,6 @@ if(!$nt)
         document.getElementsByTagName('head')[0].appendChild(script);
     })();
 </script>
-</html>
-<?php
+</html><?php
 }
 ?>

@@ -162,12 +162,10 @@ function make_poll_accordion()
 // search and scroll to answer
 function searchAnswer(poll_id)
 {
-	console.log(1111);
 	var str = $('#poll_'+poll_id+'_search').val();
-	console.log(1111);
-	var answers = $('div[data-poll_id'+poll_id+'][data-title*="'+str+'"]');
-	console.log(1111);
-	if(ansvers.length)
+	var selector = 'div[data-poll_id='+poll_id+'][data-title*="'+str+'"]';
+	var answers = $(selector);
+	if(answers.length)
 		$("html,body").animate({scrollTop: $(answers.first()).offset().top}, 1000);
 	else
 		alert('Не удалось найти "'+str+'"');

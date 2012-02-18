@@ -2,7 +2,7 @@
 	<tr>
 		<td>
 			<input id="poll_<?=$poll->id?>_search" type="text" placeholer="Поиск кандадата"/>
-			<button onclick="searchAnswer($poll->id)">Поиск</button>
+			<button onclick="searchAnswer(<?=$poll->id?>)">Поиск</button>
 		</td>
 		<td>
 			<label for="poll_<?=$poll->id?>_sort">Сортировать по</label>
