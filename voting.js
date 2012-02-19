@@ -149,13 +149,11 @@ function make_poll_accordion()
 	var options = {
 		clearStyle:true,
 		collapsible:true,
-		icons: false,
-		//					
+		icons: false,	
 		active:false,
 		change:poll_accordion_content_loader,
 		autoHeight: false,
 		//active: false,
-		//changestart:poll_accordion_content_loader
 	}; 
 	$(this).accordion(options);
 }

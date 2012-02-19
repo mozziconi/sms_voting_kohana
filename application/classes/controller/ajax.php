@@ -203,7 +203,10 @@ class Controller_Ajax extends Controller
 			->where('phone_id','=',$phone->id)
 			->where('poll_id','=',$poll->id)
 			->where('canceled','=',0)
-			->find_all();		
+			->find_all();
+
+		$md5_sign = md5($phone->md5_phone.$code->md5_code);
+
 		// Start the transaction
 		$db = Database::instance();
 		$db->begin();
@@ -239,6 +242,7 @@ class Controller_Ajax extends Controller
 				$vote->poll_id = $poll->id;
 				$vote->answer_id = $answer_id;
 				$vote->region_id = $phone->region_id;
+				$vote->md5_sign = $md5_sign;
 				$vote->weight = 1; // for rating votes, temporarly
 				$vote->save();
 			}

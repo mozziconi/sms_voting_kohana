@@ -1,6 +1,6 @@
 <table width="100%">
 	<tr>
-		<th align="center">Хэш номера телефона</th>
+		<th align="center">Маркер голоса</th>
 		<th align="center">Кандидат</th>
 		<th align="center">Дата и время</th>
 	</tr>
@@ -10,7 +10,7 @@
 	{
 	?>
 	<tr>
-		<td align="center"><?=$vote->phone->md5_phone?></td>
+		<td align="center"><?=$vote->md5_sign?></td>
 		<td align="center"><?=$vote->canceled?'<s>':''?><?=$vote->answer->title?><?=$vote->canceled?'</s>':''?></td>
 		<td align="center"><?=$vote->created?></td>
 	</tr>
