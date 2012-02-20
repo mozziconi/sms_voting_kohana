@@ -34,7 +34,7 @@
 </div>
 <script>
 	$("input:checkbox").bind("change",check_max_answers_per_vote);
-	$('#poll_<?=$poll->id?>_vote_button').button();
+	$('button').button();
 	$('#poll_<?=$poll->id?>_vote_button').button('disable');
 	$("#poll_<?=$poll->id?>_sort").change(sortAnswers);
 	$("#poll_<?=$poll->id?>_sort_order").change(sortAnswers);

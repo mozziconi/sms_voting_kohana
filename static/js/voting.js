@@ -221,6 +221,7 @@ $(document).ready(
 		// init ui components
 		// accordions
 		//$('.answer_list').each(make_accordion);
+		$('#main_menu').ptMenu();
 		$('.poll_list').each(make_poll_accordion);
 		// buttons
 		$('button').button();
