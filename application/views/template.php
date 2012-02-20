@@ -10,7 +10,7 @@ if(!$nt)
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
 		<title>Электронные голосования<?=$title?" - $title":''?></title>
-		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/flick/jquery-ui.css">
+		<link rel="stylesheet" href="/static/css/jquery-ui.css">
 		<link rel="stylesheet" href="/static/css/theme/jquery-ui.css">
 		<link rel="stylesheet" href="/static/css/valid8.css">
 		<link rel="stylesheet" href="/static/css/jquery.ui.potato.menu.css">
