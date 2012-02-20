@@ -10,8 +10,8 @@ if(!$nt)
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
 		<title>Электронные голосования<?=$title?" - $title":''?></title>
-		<!-- link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/flick/jquery-ui.css" -->
-		<link rel="stylesheet" href="/css/theme/jquery-ui.css">
+		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/flick/jquery-ui.css">
+		<!-- link rel="stylesheet" href="/css/theme/jquery-ui.css" -->
 		<link rel="stylesheet" href="http://cssr.ru/simpliste/css/isimple.css">
 		<link rel="stylesheet" href="/valid8.css">
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
