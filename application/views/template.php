@@ -16,7 +16,7 @@ if(!$nt)
 		<link rel="stylesheet" href="/static/css/jquery.ui.potato.menu.css">
 		<!-- from http://labs.makotokw.com/en/jquery/ui_potato_menu -->
 		<link rel="stylesheet" href="/static/css/style.css">
-		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+		<!--[if lt IE 9]><script src="/static/js/html5.js"></script><![endif]-->
 		<script src="/static/js/jquery-1.7.1.min.js"></script>
 		<script src="/static/js/jquery-ui-1.8.17.custom.min.js"></script>
 		<script src="/static/js/jquery.maskedinput.min.js"></script>
