@@ -21,6 +21,10 @@ body {
 	color: #ffffff;
 }
 
+#content {
+	background-color:#f0f0f0;
+}
+
 #right_column {
 	background-color:#6b6b6b;
 	width:33%;
