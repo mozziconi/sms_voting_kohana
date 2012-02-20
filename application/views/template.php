@@ -11,22 +11,22 @@ if(!$nt)
 		<link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
 		<title>Электронные голосования<?=$title?" - $title":''?></title>
 		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/flick/jquery-ui.css">
-		<!-- link rel="stylesheet" href="/css/theme/jquery-ui.css" -->
+		<!-- link rel="stylesheet" href="/static/css/theme/jquery-ui.css" -->
 		<link rel="stylesheet" href="http://cssr.ru/simpliste/css/isimple.css">
-		<link rel="stylesheet" href="/valid8.css">
+		<link rel="stylesheet" href="/static/css/valid8.css">
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-		<script src="/js/jquery-1.7.1.min.js"></script>
-		<script src="/js/jquery-ui-1.8.17.custom.min.js"></script>
-		<script src="/jquery.maskedinput.min.js"></script>
-		<script src="/jquery.valid8.js"></script>
-		<script src="/jquery.sorting.js"></script>
-		<script src="/jquery.scrollTo-min.js"></script>		
-		<script src="/voting.js"></script>
+		<script src="/static/js/jquery-1.7.1.min.js"></script>
+		<script src="/static/js/jquery-ui-1.8.17.custom.min.js"></script>
+		<script src="/static/js/jquery.maskedinput.min.js"></script>
+		<script src="/static/js/jquery.valid8.js"></script>
+		<script src="/static/js/jquery.sorting.js"></script>
+		<script src="/static/js/jquery.scrollTo-min.js"></script>		
+		<script src="/static/js/voting.js"></script>
 </head>
 <body>
 	<div class="container">
 		<header class="header clearfix">
-			<div class="logo">SMS Votings</div>
+			<div class="logo">Электронные голосования</div>
 			<div class="menu_main">
 				<a href="/future">Будущие голосования</a>
 				<a href="/">Текущие голосования</a>

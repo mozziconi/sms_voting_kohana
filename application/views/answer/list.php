@@ -1,7 +1,7 @@
 <table class="answers_header" width="100%">
 	<tr>
 		<td>
-			<input id="poll_<?=$poll->id?>_search" type="text" placeholer="Поиск кандадата"/>
+			<input id="poll_<?=$poll->id?>_search" type="text" placeholder="Поиск кандадата"/>
 			<button onclick="searchAnswer(<?=$poll->id?>)">Поиск</button>
 		</td>
 		<td>
@@ -20,7 +20,7 @@
 	</tr>
 	<tr>
 		<td width="100%" align="right" colspan="2">
-			<button onclick="vote(<?=$poll->id?>);" data-poll_id="<?=$poll->id?>">Голосую</button>
+			<button id="poll_<?=$poll->id?>_vote_button" onclick="vote(<?=$poll->id?>);" data-poll_id="<?=$poll->id?>">Голосую</button>
 		</td>
 	</tr>
 </table>
@@ -33,6 +33,9 @@
 	?>
 </div>
 <script>
+	$("input:checkbox").bind("change",check_max_answers_per_vote);
+	$('#poll_<?=$poll->id?>_vote_button').button();
+	$('#poll_<?=$poll->id?>_vote_button').button('disable');
 	$("#poll_<?=$poll->id?>_sort").change(sortAnswers);
 	$("#poll_<?=$poll->id?>_sort_order").change(sortAnswers);
 </script>
