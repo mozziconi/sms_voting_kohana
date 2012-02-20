@@ -74,13 +74,13 @@
 <div><p>Приятного волеизъявления :)</p></div>
 </div>
 <script>
-	$('#faq_container').accordion(
-		{
-			clearStyle:true,
-			collapsible:true,
-			icons: false,	
-			active:false,
-			autoHeight: false
-		}
-	);
+//	$('#faq_container').accordion(
+//		{
+//			clearStyle:true,
+//			collapsible:true,
+//			icons: false,	
+//			active:false,
+//			autoHeight: false
+//		}
+//	);
 </script>
