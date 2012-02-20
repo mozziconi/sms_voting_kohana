@@ -15,8 +15,8 @@ if(!$nt)
 		<link rel="stylesheet" href="http://cssr.ru/simpliste/css/isimple.css">
 		<link rel="stylesheet" href="/valid8.css">
 		<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+		<script src="/js/jquery-1.7.1.min.js"></script>
+		<script src="/js/jquery-ui-1.8.17.custom.min.js"></script>
 		<script src="/jquery.maskedinput.min.js"></script>
 		<script src="/jquery.valid8.js"></script>
 		<script src="/jquery.sorting.js"></script>
