@@ -144,3 +144,13 @@ Route::set('about', 'about') //'(<controller>(/<action>(/<id>)))'
 		'controller' => 'about',
 		'action'     => 'index',
 	));
+Route::set('about_authors', 'about/authors') //'(<controller>(/<action>(/<id>)))'
+	->defaults(array(
+		'controller' => 'about',
+		'action'     => 'authors',
+	));
+Route::set('about_faq', 'about/faq') //'(<controller>(/<action>(/<id>)))'
+	->defaults(array(
+		'controller' => 'about',
+		'action'     => 'faq',
+	));

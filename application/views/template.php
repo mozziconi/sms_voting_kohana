@@ -53,8 +53,8 @@ if(!$nt)
 					<a href="/about">О проекте</a>
 					<ul>
 						<li>
-							<a href="/about/info">Информация</a>
-							<a href="/about/faq">FAQ</a>
+							<a href="/about/faq">Часто задаваемые вопросы</a>
+							<a href="/about/authors">Авторы</a>
 						</li>
 					</ul>
 				</li>
