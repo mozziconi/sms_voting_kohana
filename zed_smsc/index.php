@@ -4,7 +4,7 @@ echo '<?xml version=”1.0” encoding=”utf-8”?>';
 // parse $_POST
 if(sizeof($_POST))
 {
-  $keys = array_keys($_POST));
+  $keys = array_keys($_POST);
   $key = $keys[0];
   $xml = $_POST[$key];
   //parse xml
