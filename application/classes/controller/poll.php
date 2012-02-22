@@ -75,7 +75,7 @@ class Controller_Poll extends Controller_Template
 		//render view
     $region_count = $poll->regions->count_all();
     $view->region_count = $region_count;
-    if($region_count > 1)
+    if($region_count == 1)
     {
       $region = $poll->regions->find();
       $this->template->title = ($poll->title . ', '. $region->name);
