@@ -24,7 +24,7 @@ $messages = mysql_query($q);
 ?>
 <response-poll uid=”<?=$uid?>” protocol=”<?=$protocol?>” next-request-period=”60”>
 <?php
-$ids = array()
+$ids = array();
 if(mysql_num_rows($messages))
 {
   while($message = mysql_fetch_object($messages))
