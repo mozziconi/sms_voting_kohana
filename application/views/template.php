@@ -100,9 +100,10 @@ if(!$nt)
 		</div>
 	</div>
 	<div id="footer">
-		<div id="about">
-			бла-бла-бла демократия
-		</div>
+	  <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+      <img src='/images/CC-BY-NC-SA.png' alt='Лицензионное соглашение' title='Лицензионное соглашение'>
+    </a>
+	</div>
 	</div>
 	<!-- div class="container">
 		<header class="header clearfix">
