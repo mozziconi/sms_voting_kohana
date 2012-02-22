@@ -1,5 +1,5 @@
 <?php
-echo '<?xml version=”1.0” encoding=”utf-8”?>';
+echo '<?xml version=”1.0” encoding=”UTF-8”?>';
 
 // parse $_POST
 if(sizeof($_POST))
