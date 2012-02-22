@@ -120,7 +120,9 @@ function sendSms($phone, $message)
     return "Код подтверждения поставлен в очередь на отправку и будет доставлен Вам в течении $t минут.\nНе закрывайте браузер.";
   }
   catch(Exception $e)
+  {
 		throw $e;
+  }
 }
 
 class Controller_Ajax extends Controller
