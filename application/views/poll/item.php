@@ -29,7 +29,7 @@ if ($region_count > 1)
 { 
 ?>
   <div class="poll_tab" id="poll_<?=$poll->id?>_tabs_regions">
-    <?php echo View::factory('poll/regions')->bind('poll',$poll); ?>
+    <?php echo View::factory('poll/regions')->bind('poll',$poll)->bind('region_count',$region_count); ?>
   </div>
 <?php
 }
