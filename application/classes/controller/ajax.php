@@ -113,7 +113,7 @@ function sendSms($phone, $message)
   {
     $m = new Model_Message();
     $m->created = microtime(true);
-    $->phone = $phone;
+    $m->phone = $phone;
     $m->message = $message;
     $m->save();
     $t = ORM::factory('message')->count_all();
