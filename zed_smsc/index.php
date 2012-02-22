@@ -1,25 +1,22 @@
 <?php
-echo '<?xml version=”1.0” encoding=”UTF-8”?>';
+$xml = '<?xml version="1.0" encoding="UTF-8"?>';
 
-// parse $_POST
-if(sizeof($_POST))
+if(isset($HTTP_RAW_POST_DATA))
 {
-  $keys = array_keys($_POST);
-  $key = $keys[0];
-  $xml = $_POST[$key];
+  $request = $HTTP_RAW_POST_DATA;
   //parse xml
-  $request = new SimpleXMLElement($xml);
+  $request = new SimpleXMLElement($request);
   
   $uid = $request['uid'];
   $protocol = $request['protocol'];
 }
 else
 {
-  $uid = 'test-uid';
-  $protocol = 'test-protocol';
+  header('HTTP/1.0 404 Not Found');
+  die();
 };
 
-echo '<response-poll uid=”'.$uid.'” protocol=”'.$protocol.'” next-request-period=”60”>"';
+$xml .= '<response uid="'.$uid.'" protocol="'.$protocol.'" next-request-period="60">';
 
 // connect to mysql
 $connection = mysql_connect('localhost', 'root', 'password') or ($message = mysql_error());
@@ -29,18 +26,25 @@ mysql_select_db('sms_voting') or ($message = mysql_error());
 $q = 'select * from `messages` order by `created` asc limit 30';
 $messages = mysql_query($q);
 $ids = array();
+$i = 1;
 if(mysql_num_rows($messages))
 {
   while($message = mysql_fetch_object($messages))
   {
-    echo '<message-poll><abonent isnn=”ИСНН” phone=”'.$message->phone.'”/><content-text content-type="text/plain">'.$message->message.'</content-text></message-poll>';
+    $xml .= '<message number="'.$i.'">';
+    $xml .= '<abonent isnn="1082" phone="'.$message->phone.'" operator="infon_gateway"/><content-text content-type="text/plain">'.$message->message.'</content-text>';
+    $xml .= '</message>';
     $ids[] = $message->id;
+    $i += 1;
   };
   $q = 'delete from `messages` where `id` in ('.implode(',',$ids).')';
   mysql_query($q);
 }
 else
 {
-  echo '<noreply/>';
+  $xml .= '<noreply/>';
 }
-echo '</response-poll>';
+$xml .= '</response>';
+
+echo $xml;
+
