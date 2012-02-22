@@ -98,13 +98,29 @@ function testAnswers()
 		throw new Exception("Неверный формат голоса.", 12);
 	return array_map('intval', explode(',',$answers));
 }
+
 function sendSms($phone, $message)
 {
-	$a = send_sms($phone, $message);
-	if(sizeof($a) > 2)
-		return true;
-	else
-		throw new Exception("Не удалось отправить sms: {$a[1]}");
+  //smsc.ru
+	//$a = send_sms($phone, $message);
+	//if(sizeof($a) > 2)
+//		return 'Код подтверждения отправлен.';
+//	else
+		//throw new Exception("Не удалось отправить sms: {$a[1]}");
+    
+  //zed.com
+  try
+  {
+    $m = new Model_Message();
+    $m->created = microtime(true);
+    $m->message = $message;
+    $m->save();
+    $t = ORM::factory('message')->count_all();
+    $t = ceil($t/30.0); // 30 messages per minute.... blyaaaa!
+    return "Код подтверждения поставлен в очередь на отправку и будет доставлен Вам в течении $t минут.\nНе закрывайте браузер.";
+  }
+  catch(Exception $e)
+		throw $e;
 }
 
 class Controller_Ajax extends Controller
@@ -147,7 +163,7 @@ class Controller_Ajax extends Controller
 		// generate pin
 		$pin_code = generateCode();
 
-		if(sendSms($raw_phone, "Код подтверждения: $pin_code"))
+		if($message = sendSms($raw_phone, "Код подтверждения: $pin_code"))
 		{
 			// new code
 			$code = new Model_Code();
@@ -160,7 +176,7 @@ class Controller_Ajax extends Controller
 			$session->set($session_hash,$pin_code);
 			
 			return array(
-				'message' => 'Код подтверждения отправлен.',
+				'message' => $message,
 				//'pincode' => $pin_code,
 				//'session_hash' => $session_hash,
 				);
