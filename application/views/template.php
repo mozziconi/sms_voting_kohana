@@ -100,53 +100,11 @@ if(!$nt)
 		</div>
 	</div>
 	<div id="footer">
-	  <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
-      <img src='/images/CC-BY-NC-SA.png' alt='Лицензионное соглашение' title='Лицензионное соглашение'>
-    </a>
+		<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+			<img src='/static/images/CC-BY-NC-SA.png' alt='Лицензионное соглашение' title='Лицензионное соглашение'>
+		</a>
 	</div>
 	</div>
-	<!-- div class="container">
-		<header class="header clearfix">
-			<div class="logo">Электронные голосования</div>
-			<div class="menu_main">
-				<a href="/future">Будущие голосования</a>
-				<a href="/">Текущие голосования</a>
-				<a href="/archive">Архив голосований</a>
-				<a href="/about">О проекте</a>
-			</div>
-		</header>
-		<div class="info">
-			<article class="hero clearfix">
-				<div class="col_66" id="content">
-				content here
-				</div>
-				<div class="col_33" id="stat">
-					<ol>
-						<li>выбрать голосование</li>
-						<li>выбрать варианты</li>
-						<li>ввести свой номер телефона</li>
-						<li>дождаться смс с кодом подтверждения</li>
-						<li>ввести код</li>
-						<li>PROFIT!!!111</li>
-					</ol>
-					<div class="not_for_profit">
-						<table border="0" cellpadding="0" cellspacing="0"><tr><td><div style="padding: 0.6em; background-color: #DAE6F2; border: 1px solid #B8CFE6; border-radius: 7px; -moz-border-radius: 7px;"><a href="https://money.yandex.ru/embed/?from=sbal" title="Виджеты Яндекс.Денег" style="width: 200px; height: 100px; display: block; margin-bottom: 0.6em; background: url('https://money.yandex.ru/share-balance.xml?id=153598173&key=0006EE96EE457DEA') 0 0 no-repeat; -background: none; -filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://money.yandex.ru/share-balance.xml?id=153598173&key=0006EE96EE457DEA', sizingMethod = 'crop');"></a><form action="https://money.yandex.ru/direct-payment.xml" method="post"><input type="hidden" name="receiver" value="410011287869310"/><input type="hidden" name="sum" value="0"/><input type="hidden" name="destination" value="Яндекс.Деньги &#8212; на хорошее дело не жалко!"/><input type="hidden" name="FormComment" value="Пожертвование через виджет &#171Мой баланс&#187;"/><input type="submit" value="Поддержать проект" style="margin-top: 0.6em; width: 100%;"/></form></div></td></tr></table>
-					</div>
-				</div>
-			</article>
-		</div>
-		<footer class="footer clearfix">
-			<div class="copyright">
-				Keep it simplest 
-				<div class="fb-like" data-href="http://cssr.ru/simpliste/ru.html" data-send="true" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
-			</div>
-			<ul class="menu_bottom">
-				<li class="active"><a href="#main">Текущие голосования</a></li>
-				<li><a href="#archive">Архив голосований</a></li>
-				<li><a href="#about">О проекте</a></li>         
-			</ul>
-		</footer>
-	</div -->
 	<div id="poll_dialog" style="display:none" title="Голо сование :)">
 		<!-- внезапно правая колонка -->
 		<input type="hidden" id="poll_id" value=""/>
