@@ -13,6 +13,11 @@ if(sizeof($_POST))
   $uid = $request['uid'];
   $protocol = $request['protocol'];
 }
+else
+{
+  $uid = 'test-uid';
+  $protocol = 'test-protocol';
+};
 
 // connect to mysql
 $connection = mysql_connect('localhost', 'root', 'password') or ($message = mysql_error());
