@@ -78,7 +78,7 @@ class Controller_Poll extends Controller_Template
     if($region_count > 1)
     {
       $region = $poll->regions->find();
-      $this->template->title = $poll->title . ", {$region->name}";
+      $this->template->title = ($poll->title . ', '. $region->name);
     }
     else
       $this->template->title = $poll->title;
