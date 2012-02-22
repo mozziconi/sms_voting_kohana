@@ -41,6 +41,6 @@ if(mysql_num_rows($messages))
 }
 else
 {
-  echo "\t<noreply/>\n"
+  echo "\t<noreply/>\n";
 }
 echo "</response-poll>";
