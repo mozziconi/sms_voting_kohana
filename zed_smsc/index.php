@@ -19,7 +19,7 @@ else
   $protocol = 'test-protocol';
 };
 
-echo "\n<response-poll uid=”$uid” protocol=”$protocol” next-request-period=”60”>\n";
+echo '<response-poll uid=”'.$uid.'” protocol=”'.$protocol.'” next-request-period=”60”>"';
 
 // connect to mysql
 $connection = mysql_connect('localhost', 'root', 'password') or ($message = mysql_error());
@@ -33,7 +33,7 @@ if(mysql_num_rows($messages))
 {
   while($message = mysql_fetch_object($messages))
   {
-    echo "\t<message-poll>\n\t\t<abonent isnn=”ИСНН” phone=”{$message->phone}”/>\n\t\t<content-text content-type=\"text/plain\">{$message->message}</content-text>\n\t</message-poll>\n";
+    echo '<message-poll><abonent isnn=”ИСНН” phone=”'.$message->phone.'”/><content-text content-type="text/plain">'.$message->message.'</content-text></message-poll>';
     $ids[] = $message->id;
   };
   $q = 'delete from `messages` where `id` in ('.implode(',',$ids).')';
@@ -41,6 +41,6 @@ if(mysql_num_rows($messages))
 }
 else
 {
-  echo "\t<noreply/>\n";
+  echo '<noreply/>';
 }
-echo "</response-poll>";
+echo '</response-poll>';
