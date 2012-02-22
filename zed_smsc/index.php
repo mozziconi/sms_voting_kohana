@@ -37,7 +37,7 @@ if(mysql_num_rows($messages))
     <?php
     $ids[] = $message->id;
   }
-  $q = 'delete from messages where id in ('.implode(',',$ids).'  ;
+  $q = 'delete from messages where id in ('.implode(',',$ids).')';
   mysql_query($q);
 }
 else
