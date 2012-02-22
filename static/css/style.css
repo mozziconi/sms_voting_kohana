@@ -1,7 +1,12 @@
 body {
 	background-color:#324894;
 	font-family: Verdana,Arial,sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+  min-height: 100%;
 }
+
+html {height: 100%}
 
 #page {
 	margin:3em;
@@ -46,7 +51,10 @@ body {
   padding-top: 2px;
   height: 34px;
   margin-top: -36px;
+  position: absolute;
+  width: auto;
 }
 #footer a {height: 0;}
 #page {padding-bottom: 36px;}
 
+#footer, #geader {padding-left: 3em; padding-right: 3em; }
