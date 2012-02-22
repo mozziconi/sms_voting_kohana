@@ -73,7 +73,16 @@ class Controller_Poll extends Controller_Template
 		$view->poll = $poll;
 			
 		//render view
-		$this->template->title = $poll->title;
+    $region_count = $poll->regions->count_all();
+    $this->template->region_count = $region_count;
+    if($region_count > 1)
+    {
+      $region = $poll->regions->find();
+      $this->template->title = $poll->title . ", {$region->name}";
+    }
+    else
+      $this->template->title = $poll->title;
+      
 		$this->template->content = $view;
 	}
 }

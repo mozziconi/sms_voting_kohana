@@ -8,7 +8,14 @@
 	<ul>
 		<li><a href="#poll_<?=$poll->id?>_tabs_description">Описание</a></li>
 		<li><a href="#poll_<?=$poll->id?>_tabs_answers">Голосование</a></li>
+<?php
+if ($region_count > 1)
+{ 
+?>
 		<li><a href="#poll_<?=$poll->id?>_tabs_regions">Регионы</a></li>
+<?php
+}
+?>
 		<li><a href="#poll_<?=$poll->id?>_tabs_log">Лог голосования</a></li>
 	</ul>
   <div class="poll_tab" id="poll_<?=$poll->id?>_tabs_description">
@@ -17,9 +24,16 @@
   <div class="poll_tab" id="poll_<?=$poll->id?>_tabs_answers">
     <?php echo View::factory('poll/answers')->bind('poll',$poll); ?>
   </div>
+<?php
+if ($region_count > 1)
+{ 
+?>
   <div class="poll_tab" id="poll_<?=$poll->id?>_tabs_regions">
     <?php echo View::factory('poll/regions')->bind('poll',$poll); ?>
   </div>
+<?php
+}
+?>
   <div class="poll_tab" id="poll_<?=$poll->id?>_tabs_log">
     <?php echo View::factory('poll/log')->bind('poll',$poll); ?>
   </div>
