@@ -53,8 +53,9 @@ html {height: 100%}
   margin-top: -36px;
   position: absolute;
   width: auto;
+  bottom: 0;
 }
 #footer a {height: 0;}
 #page {padding-bottom: 36px;}
 
-#footer, #geader {padding-left: 3em; padding-right: 3em; }
+#footer, #header {padding-left: 3em; padding-right: 3em; }
