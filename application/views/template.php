@@ -28,7 +28,9 @@ if(!$nt)
 </head>
 <body>
 	<div id="header">
-		<div id="logo">Электронные голосования</div>
+    <div id="logo">
+      <img src="/static/images/eg_logo.png" alt='Электронные голосования' title='Электронные голосования'>
+    </div>
 		<div id="menu">
 			<ul id="main_menu">
 				<li>
